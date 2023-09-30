@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset ="UTF-8">
+        <meta name ="viewport" content ="width =device-width,initial-scale =1.0">
+        <title>calculator</title>
+        <style>
+            .container{
+                height:550px;
+                width:700px;
+                margin-left:330px;
+                margin-top:40px;
+            }
+            .result{
+                height:60px;
+                width:400px;
+                border:1px solid black;
+                border-radius: 7px;
+                margin-left:140px;
+                margin-top: 30px;
+                background-color: black;
+
+           }
+           .calculator{
+            height:370px;
+            width: 400px;
+            border: 1px solid black;
+            border-radius:5px;
+            margin-left:140px;
+            margin-top:25px;
+            background-color: black;
+           }
+           .keys button{
+                height:45px;
+                width:60px;
+                margin-left: 30px;
+                border-radius: 7px;
+                margin-top:22px;
+                font-size: 20px;
+                background-color: white;
+                cursor:pointer;
+        
+           }
+           .keys2 button{
+                height:45px;
+                width:60px;
+                margin-left: 30px;
+                border-radius: 7px;
+                margin-top:22px;
+                font-size: 20px;
+                background-color: white;
+                cursor:pointer;
+           }
+           .keys3 button{
+                height:45px;
+                width:60px;
+                margin-left: 30px;
+                border-radius: 7px;
+                margin-top:22px;
+                font-size: 20px;
+                background-color:white;
+                cursor:pointer;
+                
+           }
+           .keys4 button{
+                height:45px;
+                width:60px;
+                margin-left: 30px;
+                border-radius: 7px;
+                margin-top:22px;
+                font-size: 20px;
+                background-color: white;
+                cursor:pointer;
+                
+           }
+           .keys5 button{
+                height:45px;
+                width:155px;
+                margin-left: 30px;
+                border-radius: 7px;
+                margin-top:22px;
+                font-size: 20px;
+                cursor:pointer;
+           }
+           #del{
+            background-color: gray;
+            color:white;
+            cursor:pointer;
+           }
+           #reset{
+            background-color: gray;
+            color:white;
+            cursor:pointer;
+           }
+           #equal{
+            background-color: red;
+            color:white;
+            cursor:pointer;
+           }
+           .larger-text {
+         font-size: 30px;
+         color: white;
+         text-align: right;
+         padding-top: 15px;
+       }
+        </style>
+    </head>
+    <body>
+        <script>
+            let currentInput = '';
+
+function getInput(number) {
+    const resultbox = document.querySelector(".result");
+    currentInput += number;
+    resultbox.textContent = currentInput;
+    resultbox.classList.add("larger-text"); 
+}
+function calculates(symbols) {
+    const resultbox = document.querySelector(".result");
+    currentInput += symbols;
+    resultbox.textContent = currentInput;
+}
+
+function deleteDigit() {
+    const resultbox = document.querySelector(".result");
+    currentInput = currentInput.slice(0, -1);
+    resultbox.textContent = currentInput;
+}
+
+function reset() {
+    const resultbox = document.querySelector(".result");
+    currentInput = '';
+    resultbox.textContent = '0';
+}
+
+function equal() {
+    const resultbox = document.querySelector(".result");
+    try {
+        const result = eval(currentInput);
+        currentInput = result.toString();
+        resultbox.textContent = currentInput;
+    } catch (error) {
+        currentInput = 'Error';
+        resultbox.textContent = currentInput;
+    }
+}
+
+function operators(symbols) {
+    const calculateSymbols = ['+', '-', '*', '/'];
+    const lastChar = currentInput[currentInput.length - 1];
+    if (calculateSymbols.includes(lastChar)) {
+        currentInput = currentInput.slice(0, -1) + symbols;
+        const resultbox = document.querySelector(".result");
+        resultbox.textContent = currentInput;
+    } else {
+        calculates(symbols);
+    }
+}
+             
+        
+        </script>
+        <div class ="container">
+            <div class ="result"></div>
+            <div class ="calculator">
+                <div class ="keys">
+                    <button onclick ="getInput('7')"><b>7</b></button>
+                    <button onclick ="getInput('8')"><b>8</b></button>
+                    <button onclick ="getInput('9')"><b>9</b></button>
+                    <button id ="del" onclick ="deleteDigit()"><b>DEL</b></button>
+                </div>
+                <div class ="keys2">
+                    <button onclick ="getInput('4')"><b>4</b></button>
+                    <button onclick ="getInput('5')"><b>5</b></button>
+                    <button onclick ="getInput('6')"><b>6</b></button>
+                    <button onclick ="operators('+')"><b>+</b></button>
+                </div>
+                <div class ="keys3">
+                    <button onclick ="getInput('1')"><b>1</b></button>
+                    <button onclick ="getInput('2')"><b>2</b></button>
+                    <button onclick ="getInput('3')"><b>3</b></button>
+                    <button onclick ="operators('-')"><b>-</b></button>
+                </div>
+                <div class ="keys4">
+                    <button onclick ="getInput('.')"><b>.</b></button>
+                    <button onclick ="getInput('0')"><b>0</b></button>
+                    <button onclick ="operators('/')"><b>/</b></button>
+                    <button onclick ="operators('*')"><b>x</b></button>
+                </div>
+                <div class = "keys5">
+                    <button id ="reset" onclick = "reset()"><b>RESET</b></button>
+                    <button id ="equal" onclick = "equal()"><b>=</b></button>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
